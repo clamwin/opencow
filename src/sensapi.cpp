@@ -64,9 +64,9 @@ IsDestinationReachableW(
             if (!g_hSensapi) {
                 SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
                 return FALSE;
-            }                
+            }
         }
-        pIsDestinationReachableA = (fpIsDestinationReachableA) 
+        pIsDestinationReachableA = (fpIsDestinationReachableA)
             ::GetProcAddress(g_hSensapi, "IsDestinationReachableA");
         if (!pIsDestinationReachableA) {
             SetLastError(ERROR_CALL_NOT_IMPLEMENTED);

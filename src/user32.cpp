@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// define these symbols so that we don't get dllimport linkage 
+// define these symbols so that we don't get dllimport linkage
 // from the system headers
 #define _USER32_
 
@@ -130,7 +130,7 @@ CharPrevW(
 // CharToOemBuffW
 // CharToOemW
 
-DWORD WINAPI 
+DWORD WINAPI
 CharUpperBuffW(
     IN OUT LPWSTR lpsz,
     IN DWORD cchLength
@@ -145,7 +145,7 @@ CharUpperBuffW(
     return cchLength;
 }
 
-LPWSTR WINAPI 
+LPWSTR WINAPI
 CharUpperW(
     IN OUT LPWSTR lpsz
     )
@@ -173,7 +173,7 @@ CharUpperW(
 // CreateDialogParamW
 // CreateMDIWindowW
 
-HWND WINAPI 
+HWND WINAPI
 CreateWindowExW(
     IN DWORD dwExStyle,
     IN LPCWSTR lpClassName,
@@ -263,7 +263,7 @@ DispatchMessageW(
 // GetClassInfoW
 // GetClassLongW
 
-int WINAPI 
+int WINAPI
 GetClassNameW(
     IN HWND hWnd,
     OUT LPWSTR lpClassName,
@@ -412,7 +412,7 @@ MessageBoxW(
 // OemToCharBuffW
 // OemToCharW
 
-BOOL WINAPI 
+BOOL WINAPI
 PeekMessageW(
     OUT LPMSG lpMsg,
     IN HWND hWnd,
@@ -465,7 +465,7 @@ RegisterClassW(
     return ::RegisterClassA(&wndClassA);
 }
 
-UINT WINAPI 
+UINT WINAPI
 RegisterClipboardFormatW(
     IN LPCWSTR lpszFormat
     )
@@ -498,18 +498,18 @@ SendMessageTimeoutW(
     // only the following message types have been verified, before using
     // other message types ensure that they are implemented correctly
     _ASSERTE(
-        Msg == WM_SETTEXT || 
-        Msg == WM_SETICON || 
+        Msg == WM_SETTEXT ||
+        Msg == WM_SETICON ||
         Msg == WM_SETFONT ||
         Msg == WM_SETTINGCHANGE );
 
     if (Msg == WM_SETTEXT) {
         CMbcsBuffer mbcsString;
         if (!mbcsString.FromUnicode((LPWSTR)lParam))
-            return ::SendMessageTimeoutA(hWnd, WM_SETTEXT, 0, 0, 
+            return ::SendMessageTimeoutA(hWnd, WM_SETTEXT, 0, 0,
                 fuFlags, uTimeout, lpdwResult); // error value depends on hWnd
 
-        return ::SendMessageTimeoutA(hWnd, WM_SETTEXT, wParam, (LPARAM) mbcsString.get(), 
+        return ::SendMessageTimeoutA(hWnd, WM_SETTEXT, wParam, (LPARAM) mbcsString.get(),
             fuFlags, uTimeout, lpdwResult);
     }
 
@@ -517,11 +517,11 @@ SendMessageTimeoutW(
         CMbcsBuffer mbcsString;
         if (!mbcsString.FromUnicode((LPWSTR)lParam))
             mbcsString.SetNull();   // don't set the string
-        return ::SendMessageTimeoutA(hWnd, WM_SETTINGCHANGE, wParam, (LPARAM) mbcsString.get(), 
+        return ::SendMessageTimeoutA(hWnd, WM_SETTINGCHANGE, wParam, (LPARAM) mbcsString.get(),
             fuFlags, uTimeout, lpdwResult);
     }
 
-    return ::SendMessageTimeoutA(hWnd, Msg, wParam, lParam, 
+    return ::SendMessageTimeoutA(hWnd, Msg, wParam, lParam,
         fuFlags, uTimeout, lpdwResult);
 }
 
@@ -536,8 +536,8 @@ SendMessageW(
     // only the following message types have been verified, before using
     // other message types ensure that they are implemented correctly
     _ASSERTE(
-        Msg == WM_SETTEXT || 
-        Msg == WM_SETICON || 
+        Msg == WM_SETTEXT ||
+        Msg == WM_SETICON ||
         Msg == WM_SETFONT ||
         Msg == WM_SETTINGCHANGE );
 

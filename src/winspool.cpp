@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// define these symbols so that we don't get dllimport linkage 
+// define these symbols so that we don't get dllimport linkage
 // from the system headers
 #define _KERNEL32_
 
@@ -68,7 +68,7 @@ DocumentPropertiesW(
     IN LPWSTR    pDeviceName,
     OUT PDEVMODEW pDevModeOutput,
     IN PDEVMODEW pDevModeInput,
-    IN DWORD     fMode 
+    IN DWORD     fMode
     )
 {
     CMbcsBuffer mbcsDeviceName;
@@ -84,7 +84,7 @@ DocumentPropertiesW(
                 ::SetLastError(ERROR_NOT_ENOUGH_MEMORY);
                 return -1;
             }
-            ::CopyMemory(pDevModeInputA + sizeof(DEVMODEA), pDevModeInput + pDevModeInput->dmSize, 
+            ::CopyMemory(pDevModeInputA + sizeof(DEVMODEA), pDevModeInput + pDevModeInput->dmSize,
                 pDevModeInput->dmDriverExtra);
         }
         else {
@@ -116,10 +116,10 @@ DocumentPropertiesW(
         pDevModeInputA->dmDisplayFlags      = pDevModeInput->dmDisplayFlags;
         pDevModeInputA->dmDisplayFrequency  = pDevModeInput->dmDisplayFrequency;
 
-        ::WideCharToMultiByte(CP_ACP, 0, pDevModeInput->dmDeviceName, -1, 
+        ::WideCharToMultiByte(CP_ACP, 0, pDevModeInput->dmDeviceName, -1,
             (LPSTR) pDevModeInputA->dmDeviceName, CCHDEVICENAME, NULL, NULL);
         if (pDevModeInputA->dmFields & DM_FORMNAME) {
-            ::WideCharToMultiByte(CP_ACP, 0, pDevModeInput->dmFormName, -1, 
+            ::WideCharToMultiByte(CP_ACP, 0, pDevModeInput->dmFormName, -1,
                 (LPSTR) pDevModeInputA->dmFormName, CCHFORMNAME, NULL, NULL);
         }
     }
@@ -146,13 +146,13 @@ DocumentPropertiesW(
 
     LONG lResult = ::DocumentPropertiesA(hWnd, hPrinter, mbcsDeviceName,
         pDevModeOutputA, pDevModeInputA, fMode);
-    
+
     if (pDevModeInputA != &devModeInputAStatic)
         ::free(pDevModeInputA);
 
     if (lResult == IDOK && pDevModeOutputA) {
         if (pDevModeOutputA->dmDriverExtra > 0) {
-            ::CopyMemory(pDevModeOutput + pDevModeOutput->dmSize, pDevModeOutputA + pDevModeOutputA->dmSize, 
+            ::CopyMemory(pDevModeOutput + pDevModeOutput->dmSize, pDevModeOutputA + pDevModeOutputA->dmSize,
                 pDevModeOutputA->dmDriverExtra);
         }
 
@@ -178,10 +178,10 @@ DocumentPropertiesW(
         pDevModeOutput->dmDisplayFlags      = pDevModeOutputA->dmDisplayFlags;
         pDevModeOutput->dmDisplayFrequency  = pDevModeOutputA->dmDisplayFrequency;
 
-        ::MultiByteToWideChar(CP_ACP, 0, (LPSTR) pDevModeOutputA->dmDeviceName, -1, 
+        ::MultiByteToWideChar(CP_ACP, 0, (LPSTR) pDevModeOutputA->dmDeviceName, -1,
             (LPWSTR) pDevModeOutput->dmDeviceName, CCHDEVICENAME);
         if (pDevModeOutput->dmFields & DM_FORMNAME) {
-            ::MultiByteToWideChar(CP_ACP, 0, (LPSTR) pDevModeOutputA->dmFormName, -1, 
+            ::MultiByteToWideChar(CP_ACP, 0, (LPSTR) pDevModeOutputA->dmFormName, -1,
                 (LPWSTR) pDevModeOutput->dmFormName, CCHFORMNAME);
         }
     }

@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// define these symbols so that we don't get dllimport linkage 
+// define these symbols so that we don't get dllimport linkage
 // from the system headers
 #define _SHELL32_
 
@@ -89,7 +89,7 @@ SHBrowseForFolderW(
 
 EXTERN_C BOOL STDAPICALLTYPE
 SHGetPathFromIDListW(
-    LPCITEMIDLIST pidl, 
+    LPCITEMIDLIST pidl,
     LPWSTR pszPath
     )
 {
@@ -107,9 +107,9 @@ SHGetPathFromIDListW(
 
 EXTERN_C INT STDAPICALLTYPE
 ShellAboutW(
-    HWND hWnd, 
-    LPCWSTR szApp, 
-    LPCWSTR szOtherStuff, 
+    HWND hWnd,
+    LPCWSTR szApp,
+    LPCWSTR szOtherStuff,
     HICON hIcon
     )
 {
@@ -128,11 +128,11 @@ ShellAboutW(
 
 EXTERN_C HINSTANCE STDAPICALLTYPE
 ShellExecuteW(
-    HWND hwnd, 
-    LPCWSTR lpOperation, 
-    LPCWSTR lpFile, 
-    LPCWSTR lpParameters, 
-    LPCWSTR lpDirectory, 
+    HWND hwnd,
+    LPCWSTR lpOperation,
+    LPCWSTR lpFile,
+    LPCWSTR lpParameters,
+    LPCWSTR lpDirectory,
     INT nShowCmd
     )
 {

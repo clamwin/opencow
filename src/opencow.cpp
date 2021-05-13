@@ -63,13 +63,13 @@ int         g_nDebug                = DEBUG_DEFAULT;
 static BOOL InitializeSystemVersion();
 
 // ----------------------------------------------------------------------------
-// DLL 
+// DLL
 
-BOOL APIENTRY 
+BOOL APIENTRY
 DllMain(
-    HINSTANCE   hInstanceDLL, 
-    DWORD       dwReason, 
-    LPVOID      /*lpReserved*/ 
+    HINSTANCE   hInstanceDLL,
+    DWORD       dwReason,
+    LPVOID      /*lpReserved*/
     )
 {
     if (dwReason == DLL_PROCESS_ATTACH)
@@ -80,12 +80,12 @@ DllMain(
         if (!InitializeSystemVersion())
             return FALSE;
 
-        // determine the debug level that we are running at. 
+        // determine the debug level that we are running at.
         // Level 0 = no notification messages (default for release build)
         // Level 1 = load and unload
         // Level 2 = 1 + GetProcAddress of opencow implemented functions
         char szValue[16];
-        DWORD dwLen = ::GetEnvironmentVariableA("OPENCOW_DEBUG", 
+        DWORD dwLen = ::GetEnvironmentVariableA("OPENCOW_DEBUG",
             szValue, sizeof(szValue));
         if (dwLen == 1) {
             if (*szValue >= '0' && *szValue <= '2')
@@ -95,9 +95,9 @@ DllMain(
         // if we are running at any debug level then we output a message
         // when the library is loaded
         if (g_nDebug >= 1) {
-            int nResult = ::MessageBoxA(NULL, 
+            int nResult = ::MessageBoxA(NULL,
                 "Opencow " BUILD_TYPE " DLL has been loaded. "
-                "Press cancel to disable all notifications.", "opencow", 
+                "Press cancel to disable all notifications.", "opencow",
                 MB_OKCANCEL | MB_SETFOREGROUND);
             if (nResult == IDCANCEL)
                 g_nDebug = 0;
@@ -126,8 +126,8 @@ DllMain(
         // if we are running at any debug level then we output a message
         // when the library is unloaded
         if (g_nDebug >= 1) {
-            ::MessageBoxA(NULL, 
-                "Opencow " BUILD_TYPE " DLL has been unloaded.", "opencow", 
+            ::MessageBoxA(NULL,
+                "Opencow " BUILD_TYPE " DLL has been unloaded.", "opencow",
                 MB_OK | MB_SETFOREGROUND);
         }
 
@@ -140,7 +140,7 @@ DllMain(
 // ----------------------------------------------------------------------------
 // API
 
-static int 
+static int
 GetServicePack(
     const char * aVersion)
 {
@@ -151,7 +151,7 @@ GetServicePack(
     return aVersion[ServicePackNumberOffset] - '0';
 }
 
-static BOOL 
+static BOOL
 InitializeSystemVersion()
 {
     OSVERSIONINFOA osvi;
@@ -213,6 +213,6 @@ InitializeSystemVersion()
         g_nPlatformServicePack = GetServicePack(osvi.szCSDVersion);
     }
 
-    return TRUE; 
+    return TRUE;
 }
 

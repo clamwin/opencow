@@ -67,18 +67,18 @@ extern HMODULE g_hOleacc;
 // API
 
 typedef HRESULT (STDAPICALLTYPE *fpCreateStdAccessibleProxyA)(
-    HWND hwnd, 
-    LPCSTR pClassName, 
-    LONG idObject, 
-    REFIID riid, 
+    HWND hwnd,
+    LPCSTR pClassName,
+    LONG idObject,
+    REFIID riid,
     void** ppvObject);
 
-EXTERN_C HRESULT STDAPICALLTYPE 
+EXTERN_C HRESULT STDAPICALLTYPE
 CreateStdAccessibleProxyW(
-    HWND hwnd, 
-    LPCWSTR pClassName, 
-    LONG idObject, 
-    REFIID riid, 
+    HWND hwnd,
+    LPCWSTR pClassName,
+    LONG idObject,
+    REFIID riid,
     void** ppvObject
     )
 {
@@ -92,14 +92,14 @@ CreateStdAccessibleProxyW(
 }
 
 typedef UINT (STDAPICALLTYPE *fpGetRoleTextA)(
-    DWORD lRole, 
-    LPSTR lpszRole, 
+    DWORD lRole,
+    LPSTR lpszRole,
     UINT cchRoleMax);
 
-EXTERN_C UINT STDAPICALLTYPE 
+EXTERN_C UINT STDAPICALLTYPE
 GetRoleTextW(
-    DWORD lRole, 
-    LPWSTR lpszRole, 
+    DWORD lRole,
+    LPWSTR lpszRole,
     UINT cchRoleMax
     )
 {
@@ -126,14 +126,14 @@ GetRoleTextW(
 }
 
 typedef UINT (STDAPICALLTYPE *fpGetStateTextA)(
-    DWORD lStateBit, 
-    LPSTR lpszState, 
+    DWORD lStateBit,
+    LPSTR lpszState,
     UINT cchState);
 
-EXTERN_C UINT STDAPICALLTYPE 
+EXTERN_C UINT STDAPICALLTYPE
 GetStateTextW(
-    DWORD lStateBit, 
-    LPWSTR lpszState, 
+    DWORD lStateBit,
+    LPWSTR lpszState,
     UINT cchState
     )
 {

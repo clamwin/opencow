@@ -31,7 +31,7 @@
 ; the provisions above, a recipient may use your version of this file under
 ; the terms of any one of the MPL, the GPL or the LGPL.
 ;
-; ***** END LICENSE BLOCK ***** 
+; ***** END LICENSE BLOCK *****
 
 EXPORTS
 
@@ -82,7 +82,7 @@ EXPORTS
 ;    PageSetupDlgW
 ;    PrintDlgW
 ;    ReplaceTextW
-    
+
 ;gdi32
 ; NONE, see symbols.txt
 
@@ -106,7 +106,7 @@ EXPORTS
     ImmSetCompositionFontW
     ImmSetCompositionStringW
     ImmUnregisterWordW
-    
+
 ;kernel32.cpp
     AddAtomW
 ;    BeginUpdateResourceA
@@ -282,7 +282,7 @@ EXPORTS
     _wrename
     _wstat
     _wstati64
-    
+
 ;msvfw32
 ;    GetOpenFileNamePreviewW
 ;    GetSaveFileNamePreviewW
@@ -357,7 +357,7 @@ EXPORTS
     ShellExecuteW
 ;    Shell_NotifyIconW
 
-;user32.cpp    
+;user32.cpp
 ;    AppendMenuW
 ;    BroadcastSystemMessageW
 ;    CallMsgFilterW

@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// define these symbols so that we don't get dllimport linkage 
+// define these symbols so that we don't get dllimport linkage
 // from the system headers
 #define _ADVAPI32_
 
@@ -118,7 +118,7 @@ RegCreateKeyExW(
     if (!mbcsClass.FromUnicode(lpClass))
         return ERROR_NOT_ENOUGH_MEMORY;
 
-    return ::RegCreateKeyExA(hKey, mbcsSubKey, Reserved, mbcsClass, dwOptions, 
+    return ::RegCreateKeyExA(hKey, mbcsSubKey, Reserved, mbcsClass, dwOptions,
         samDesired, lpSecurityAttributes, phkResult, lpdwDisposition);
 }
 
@@ -283,9 +283,9 @@ RegEnumValueW(
 
         // if we have a value > 0 for convert len then we have a string to convert
         if (nConvertLen > 0) {
-            nChars = ::MultiByteToWideChar(CP_ACP, 0, mbcsData, nConvertLen, 
+            nChars = ::MultiByteToWideChar(CP_ACP, 0, mbcsData, nConvertLen,
                 (wchar_t*) lpData, (*lpcbData)/sizeof(wchar_t));
-            *lpcbData = nChars; // include NULL 
+            *lpcbData = nChars; // include NULL
         }
         else {
             ::CopyMemory(lpData, mbcsData.get(), dwDataLen);
@@ -380,7 +380,7 @@ RegQueryInfoKeyW(
 
     DWORD dwClassSize = mbcsClass.BufferSize();
     LONG lResult = ::RegQueryInfoKeyA(hKey, mbcsClass, mbcsClass ? &dwClassSize : NULL,
-        lpReserved, lpcSubKeys, lpcbMaxSubKeyLen, lpcbMaxClassLen, lpcValues, 
+        lpReserved, lpcSubKeys, lpcbMaxSubKeyLen, lpcbMaxClassLen, lpcValues,
         lpcbMaxValueNameLen, lpcbMaxValueLen, lpcbSecurityDescriptor,
         lpftLastWriteTime);
     if (lResult != ERROR_SUCCESS) {
@@ -424,7 +424,7 @@ RegQueryValueExW(
 
     DWORD dwType;
     DWORD dwDataLen = mbcsData.BufferSize();
-    LONG lResult = ::RegQueryValueExA(hKey, mbcsValueName, lpReserved, 
+    LONG lResult = ::RegQueryValueExA(hKey, mbcsValueName, lpReserved,
         &dwType, (LPBYTE) mbcsData.get(), &dwDataLen);
     if (lResult != ERROR_SUCCESS)
         return lResult;
@@ -451,9 +451,9 @@ RegQueryValueExW(
 
         // if we have a value > 0 for convert len then we have a string to convert
         if (nConvertLen > 0) {
-            int nChars = ::MultiByteToWideChar(CP_ACP, 0, mbcsData, nConvertLen, 
+            int nChars = ::MultiByteToWideChar(CP_ACP, 0, mbcsData, nConvertLen,
                 (wchar_t*) lpData, (*lpcbData)/sizeof(wchar_t));
-            *lpcbData = nChars; // include NULL 
+            *lpcbData = nChars; // include NULL
         }
         else {
             ::CopyMemory(lpData, mbcsData.get(), dwDataLen);

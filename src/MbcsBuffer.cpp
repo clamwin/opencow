@@ -41,7 +41,7 @@
 // ----------------------------------------------------------------------------
 // CMbcsBuffer
 
-bool 
+bool
 CMbcsBuffer::SetCapacity(
     int aMinCapacity
     )
@@ -68,10 +68,10 @@ CMbcsBuffer::SetCapacity(
     return true;
 }
 
-bool 
+bool
 CMbcsBuffer::FromUnicode(
-    LPCWSTR aString, 
-    int     aStringLen, 
+    LPCWSTR aString,
+    int     aStringLen,
     int     aMinCapacity)
 {
     if (!aString) {
@@ -82,7 +82,7 @@ CMbcsBuffer::FromUnicode(
     if (aStringLen == -1)
         aStringLen = ::lstrlenW(aString) + 1;
 
-    int aRequiredLen = ::WideCharToMultiByte(CP_ACP, 0, 
+    int aRequiredLen = ::WideCharToMultiByte(CP_ACP, 0,
         aString, aStringLen, NULL, 0, NULL, NULL);
     if (aRequiredLen < 1) {
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
@@ -101,7 +101,7 @@ CMbcsBuffer::FromUnicode(
         return false;
     }
 
-    ::WideCharToMultiByte(CP_ACP, 0, aString, aStringLen, 
+    ::WideCharToMultiByte(CP_ACP, 0, aString, aStringLen,
         mBuffer, mBufferSize, NULL, NULL);
 
     return true;

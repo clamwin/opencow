@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// define these symbols so that we don't get dllimport linkage 
+// define these symbols so that we don't get dllimport linkage
 // from the system headers
 #define _KERNEL32_
 
@@ -99,13 +99,13 @@ extern HMODULE g_hImm32;
 typedef HKL (WINAPI *fpImmInstallIMEA)(IN LPCSTR lpszIMEFileName, IN LPCSTR lpszLayoutText);
 typedef HKL (WINAPI *fpImmInstallIMEW)(IN LPCWSTR lpszIMEFileName, IN LPCWSTR lpszLayoutText);
 
-HKL WINAPI 
+HKL WINAPI
 ImmInstallIMEW(
-    IN LPCWSTR lpszIMEFileName, 
+    IN LPCWSTR lpszIMEFileName,
     IN LPCWSTR lpszLayoutText
     )
 {
-    IMPLEMENT_IMM_FUNCTION(InstallIME, 
+    IMPLEMENT_IMM_FUNCTION(InstallIME,
         (lpszIMEFileName, lpszLayoutText), 0)
 
     // --- Windows 95 only ---
@@ -124,14 +124,14 @@ ImmInstallIMEW(
 typedef UINT (WINAPI *fpImmGetDescriptionA)(IN HKL, OUT LPSTR, IN UINT uBufLen);
 typedef UINT (WINAPI *fpImmGetDescriptionW)(IN HKL, OUT LPWSTR, IN UINT uBufLen);
 
-UINT WINAPI 
+UINT WINAPI
 ImmGetDescriptionW(
-    IN HKL hKL, 
-    OUT LPWSTR lpszDescription, 
+    IN HKL hKL,
+    OUT LPWSTR lpszDescription,
     IN UINT uBufLen
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetDescription, 
+    IMPLEMENT_IMM_FUNCTION(GetDescription,
         (hKL, lpszDescription, uBufLen), 0)
 
     // --- Windows 95 only ---
@@ -152,20 +152,20 @@ ImmGetDescriptionW(
 
     ::MultiByteToWideChar(CP_ACP, 0, mbcsDescription, (int) uiLen + 1, lpszDescription, uBufLen);
     lpszDescription[uBufLen - 1] = L'\0';
-    return ::lstrlenW(lpszDescription); // do not include the NULL 
+    return ::lstrlenW(lpszDescription); // do not include the NULL
 }
 
 typedef UINT (WINAPI *fpImmGetIMEFileNameA)(IN HKL, OUT LPSTR, IN UINT uBufLen);
 typedef UINT (WINAPI *fpImmGetIMEFileNameW)(IN HKL, OUT LPWSTR, IN UINT uBufLen);
 
-UINT WINAPI 
+UINT WINAPI
 ImmGetIMEFileNameW(
-    IN HKL hKL, 
-    OUT LPWSTR lpszFileName, 
+    IN HKL hKL,
+    OUT LPWSTR lpszFileName,
     IN UINT uBufLen
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetIMEFileName, 
+    IMPLEMENT_IMM_FUNCTION(GetIMEFileName,
         (hKL, lpszFileName, uBufLen), 0)
 
     // --- Windows 95 only ---
@@ -186,7 +186,7 @@ ImmGetIMEFileNameW(
 
     ::MultiByteToWideChar(CP_ACP, 0, mbcsFileName, (int) uiLen + 1, lpszFileName, uBufLen);
     lpszFileName[uBufLen - 1] = L'\0';
-    return ::lstrlenW(lpszFileName); // do not include the NULL 
+    return ::lstrlenW(lpszFileName); // do not include the NULL
 }
 
 // ----------------------------------------------------------------------------
@@ -195,15 +195,15 @@ ImmGetIMEFileNameW(
 typedef LONG (WINAPI *fpImmGetCompositionStringA)(IN HIMC, IN DWORD, OUT LPVOID, IN DWORD);
 typedef LONG (WINAPI *fpImmGetCompositionStringW)(IN HIMC, IN DWORD, OUT LPVOID, IN DWORD);
 
-LONG WINAPI 
+LONG WINAPI
 ImmGetCompositionStringW(
-    IN HIMC hIMC,      
-    IN DWORD dwIndex,  
-    OUT LPVOID lpBuf,   
-    IN DWORD dwBufLen  
+    IN HIMC hIMC,
+    IN DWORD dwIndex,
+    OUT LPVOID lpBuf,
+    IN DWORD dwBufLen
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetCompositionString, 
+    IMPLEMENT_IMM_FUNCTION(GetCompositionString,
         (hIMC, dwIndex, lpBuf, dwBufLen), IMM_ERROR_GENERAL)
 
     // --- Windows 95 only ---
@@ -215,17 +215,17 @@ ImmGetCompositionStringW(
 typedef BOOL (WINAPI *fpImmSetCompositionStringA)(IN HIMC, IN DWORD dwIndex, IN LPVOID lpComp, IN DWORD, IN LPVOID lpRead, IN DWORD);
 typedef BOOL (WINAPI *fpImmSetCompositionStringW)(IN HIMC, IN DWORD dwIndex, IN LPVOID lpComp, IN DWORD, IN LPVOID lpRead, IN DWORD);
 
-BOOL WINAPI 
+BOOL WINAPI
 ImmSetCompositionStringW(
-    IN HIMC hIMC,        
-    IN DWORD dwIndex,    
-    IN LPVOID lpComp,    
-    IN DWORD dwCompLen,  
-    IN LPVOID lpRead,    
-    IN DWORD dwReadLen   
+    IN HIMC hIMC,
+    IN DWORD dwIndex,
+    IN LPVOID lpComp,
+    IN DWORD dwCompLen,
+    IN LPVOID lpRead,
+    IN DWORD dwReadLen
     )
 {
-    IMPLEMENT_IMM_FUNCTION(SetCompositionString, 
+    IMPLEMENT_IMM_FUNCTION(SetCompositionString,
         (hIMC, dwIndex, lpComp, dwCompLen, lpRead, dwReadLen), FALSE)
 
     // --- Windows 95 only ---
@@ -237,13 +237,13 @@ ImmSetCompositionStringW(
 typedef DWORD (WINAPI *fpImmGetCandidateListCountA)(IN HIMC, OUT LPDWORD lpdwListCount);
 typedef DWORD (WINAPI *fpImmGetCandidateListCountW)(IN HIMC, OUT LPDWORD lpdwListCount);
 
-DWORD WINAPI 
+DWORD WINAPI
 ImmGetCandidateListCountW(
-    IN HIMC hIMC,        
+    IN HIMC hIMC,
     OUT LPDWORD lpdwListCount
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetCandidateListCount, 
+    IMPLEMENT_IMM_FUNCTION(GetCandidateListCount,
         (hIMC, lpdwListCount), 0)
 
     // --- Windows 95 only ---
@@ -255,15 +255,15 @@ ImmGetCandidateListCountW(
 typedef DWORD (WINAPI *fpImmGetCandidateListA)(IN HIMC, IN DWORD dwIndex, OUT LPCANDIDATELIST, IN DWORD dwBufLen);
 typedef DWORD (WINAPI *fpImmGetCandidateListW)(IN HIMC, IN DWORD dwIndex, OUT LPCANDIDATELIST, IN DWORD dwBufLen);
 
-DWORD WINAPI 
+DWORD WINAPI
 ImmGetCandidateListW(
-    IN HIMC hIMC,        
-    IN DWORD dwIndex, 
-    OUT LPCANDIDATELIST lpCandList, 
+    IN HIMC hIMC,
+    IN DWORD dwIndex,
+    OUT LPCANDIDATELIST lpCandList,
     IN DWORD dwBufLen
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetCandidateList, 
+    IMPLEMENT_IMM_FUNCTION(GetCandidateList,
         (hIMC, dwIndex, lpCandList, dwBufLen), 0)
 
     // --- Windows 95 only ---
@@ -275,15 +275,15 @@ ImmGetCandidateListW(
 typedef DWORD (WINAPI *fpImmGetGuideLineA)(IN HIMC, IN DWORD dwIndex, OUT LPSTR, IN DWORD dwBufLen);
 typedef DWORD (WINAPI *fpImmGetGuideLineW)(IN HIMC, IN DWORD dwIndex, OUT LPWSTR, IN DWORD dwBufLen);
 
-DWORD WINAPI 
+DWORD WINAPI
 ImmGetGuideLineW(
-    IN HIMC hIMC,        
-    IN DWORD dwIndex, 
-    OUT LPWSTR lpBuf,  
+    IN HIMC hIMC,
+    IN DWORD dwIndex,
+    OUT LPWSTR lpBuf,
     IN DWORD dwBufLen
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetGuideLine, 
+    IMPLEMENT_IMM_FUNCTION(GetGuideLine,
         (hIMC, dwIndex, lpBuf, dwBufLen), 0)
 
     // --- Windows 95 only ---
@@ -295,13 +295,13 @@ ImmGetGuideLineW(
 typedef BOOL (WINAPI *fpImmGetCompositionFontA)(IN HIMC, OUT LPLOGFONTA);
 typedef BOOL (WINAPI *fpImmGetCompositionFontW)(IN HIMC, OUT LPLOGFONTW);
 
-BOOL WINAPI 
+BOOL WINAPI
 ImmGetCompositionFontW(
-    IN HIMC hIMC,        
-    OUT LPLOGFONTW lplf  
+    IN HIMC hIMC,
+    OUT LPLOGFONTW lplf
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetCompositionFont, 
+    IMPLEMENT_IMM_FUNCTION(GetCompositionFont,
         (hIMC, lplf), FALSE)
 
     // --- Windows 95 only ---
@@ -313,13 +313,13 @@ ImmGetCompositionFontW(
 typedef BOOL (WINAPI *fpImmSetCompositionFontA)(IN HIMC, IN LPLOGFONTA);
 typedef BOOL (WINAPI *fpImmSetCompositionFontW)(IN HIMC, IN LPLOGFONTW);
 
-BOOL WINAPI 
+BOOL WINAPI
 ImmSetCompositionFontW(
-    IN HIMC hIMC,        
-    IN LPLOGFONTW lplf  
+    IN HIMC hIMC,
+    IN LPLOGFONTW lplf
     )
 {
-    IMPLEMENT_IMM_FUNCTION(SetCompositionFont, 
+    IMPLEMENT_IMM_FUNCTION(SetCompositionFont,
         (hIMC, lplf), FALSE)
 
     // --- Windows 95 only ---
@@ -331,15 +331,15 @@ ImmSetCompositionFontW(
 typedef BOOL (WINAPI *fpImmConfigureIMEA)(IN HKL, IN HWND, IN DWORD, IN LPVOID);
 typedef BOOL (WINAPI *fpImmConfigureIMEW)(IN HKL, IN HWND, IN DWORD, IN LPVOID);
 
-BOOL WINAPI 
+BOOL WINAPI
 ImmConfigureIMEW(
-    IN HKL hKL,       
-    IN HWND hWnd,     
-    IN DWORD dwMode,  
-    IN LPVOID lpData  
+    IN HKL hKL,
+    IN HWND hWnd,
+    IN DWORD dwMode,
+    IN LPVOID lpData
     )
 {
-    IMPLEMENT_IMM_FUNCTION(ConfigureIME, 
+    IMPLEMENT_IMM_FUNCTION(ConfigureIME,
         (hKL, hWnd, dwMode, lpData), FALSE)
 
     // --- Windows 95 only ---
@@ -351,15 +351,15 @@ ImmConfigureIMEW(
 typedef LRESULT (WINAPI *fpImmEscapeA)(IN HKL, IN HIMC, IN UINT, IN LPVOID);
 typedef LRESULT (WINAPI *fpImmEscapeW)(IN HKL, IN HIMC, IN UINT, IN LPVOID);
 
-LRESULT WINAPI 
+LRESULT WINAPI
 ImmEscapeW(
-    IN HKL hKL,       
-    IN HIMC hIMC,     
-    IN UINT uEscape,  
-    IN LPVOID lpData  
+    IN HKL hKL,
+    IN HIMC hIMC,
+    IN UINT uEscape,
+    IN LPVOID lpData
     )
 {
-    IMPLEMENT_IMM_FUNCTION(Escape, 
+    IMPLEMENT_IMM_FUNCTION(Escape,
         (hKL, hIMC, uEscape, lpData), 0)
 
     // --- Windows 95 only ---
@@ -371,17 +371,17 @@ ImmEscapeW(
 typedef DWORD (WINAPI *fpImmGetConversionListA)(IN HKL, IN HIMC, IN LPCSTR, OUT LPCANDIDATELIST, IN DWORD dwBufLen, IN UINT uFlag);
 typedef DWORD (WINAPI *fpImmGetConversionListW)(IN HKL, IN HIMC, IN LPCWSTR, OUT LPCANDIDATELIST, IN DWORD dwBufLen, IN UINT uFlag);
 
-DWORD WINAPI 
+DWORD WINAPI
 ImmGetConversionListW(
-    IN HKL hKL,                 
-    IN HIMC hIMC,               
-    IN LPCWSTR lpSrc,           
-    OUT LPCANDIDATELIST lpDst,   
-    IN DWORD dwBufLen,          
-    IN UINT uFlag               
+    IN HKL hKL,
+    IN HIMC hIMC,
+    IN LPCWSTR lpSrc,
+    OUT LPCANDIDATELIST lpDst,
+    IN DWORD dwBufLen,
+    IN UINT uFlag
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetConversionList, 
+    IMPLEMENT_IMM_FUNCTION(GetConversionList,
         (hKL, hIMC, lpSrc, lpDst, dwBufLen, uFlag), 0)
 
     // --- Windows 95 only ---
@@ -393,15 +393,15 @@ ImmGetConversionListW(
 typedef BOOL (WINAPI *fpImmIsUIMessageA)(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
 typedef BOOL (WINAPI *fpImmIsUIMessageW)(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
 
-BOOL WINAPI 
+BOOL WINAPI
 ImmIsUIMessageW(
-    IN HWND hWndIME,   
-    IN UINT msg,       
-    IN WPARAM wParam,  
-    IN LPARAM lParam   
+    IN HWND hWndIME,
+    IN UINT msg,
+    IN WPARAM wParam,
+    IN LPARAM lParam
     )
 {
-    IMPLEMENT_IMM_FUNCTION(IsUIMessage, 
+    IMPLEMENT_IMM_FUNCTION(IsUIMessage,
         (hWndIME, msg, wParam, lParam), FALSE)
 
     // --- Windows 95 only ---
@@ -413,15 +413,15 @@ ImmIsUIMessageW(
 typedef BOOL (WINAPI *fpImmRegisterWordA)(IN HKL, IN LPCSTR lpszReading, IN DWORD, IN LPCSTR lpszRegister);
 typedef BOOL (WINAPI *fpImmRegisterWordW)(IN HKL, IN LPCWSTR lpszReading, IN DWORD, IN LPCWSTR lpszRegister);
 
-BOOL WINAPI 
+BOOL WINAPI
 ImmRegisterWordW(
-    IN HKL hKL,              
-    IN LPCWSTR lpszReading,  
-    IN DWORD dwStyle,        
-    IN LPCWSTR lpszRegister  
+    IN HKL hKL,
+    IN LPCWSTR lpszReading,
+    IN DWORD dwStyle,
+    IN LPCWSTR lpszRegister
     )
 {
-    IMPLEMENT_IMM_FUNCTION(RegisterWord, 
+    IMPLEMENT_IMM_FUNCTION(RegisterWord,
         (hKL, lpszReading, dwStyle, lpszRegister), FALSE)
 
     // --- Windows 95 only ---
@@ -433,15 +433,15 @@ ImmRegisterWordW(
 typedef BOOL (WINAPI *fpImmUnregisterWordA)(IN HKL, IN LPCSTR lpszReading, IN DWORD, IN LPCSTR lpszUnregister);
 typedef BOOL (WINAPI *fpImmUnregisterWordW)(IN HKL, IN LPCWSTR lpszReading, IN DWORD, IN LPCWSTR lpszUnregister);
 
-BOOL WINAPI 
+BOOL WINAPI
 ImmUnregisterWordW(
-    IN HKL hKL,              
-    IN LPCWSTR lpszReading,  
-    IN DWORD dwStyle,        
+    IN HKL hKL,
+    IN LPCWSTR lpszReading,
+    IN DWORD dwStyle,
     IN LPCWSTR lpszUnregister
     )
 {
-    IMPLEMENT_IMM_FUNCTION(UnregisterWord, 
+    IMPLEMENT_IMM_FUNCTION(UnregisterWord,
         (hKL, lpszReading, dwStyle, lpszUnregister), FALSE)
 
     // --- Windows 95 only ---
@@ -453,14 +453,14 @@ ImmUnregisterWordW(
 typedef UINT (WINAPI *fpImmGetRegisterWordStyleA)(IN HKL, IN UINT nItem, OUT LPSTYLEBUFA);
 typedef UINT (WINAPI *fpImmGetRegisterWordStyleW)(IN HKL, IN UINT nItem, OUT LPSTYLEBUFW);
 
-UINT WINAPI 
+UINT WINAPI
 ImmGetRegisterWordStyleW(
-    IN HKL hKL,               
-    IN UINT nItem,            
-    OUT LPSTYLEBUFW lpStyleBuf  
+    IN HKL hKL,
+    IN UINT nItem,
+    OUT LPSTYLEBUFW lpStyleBuf
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetRegisterWordStyle, 
+    IMPLEMENT_IMM_FUNCTION(GetRegisterWordStyle,
         (hKL, nItem, lpStyleBuf), 0)
 
     // --- Windows 95 only ---
@@ -472,17 +472,17 @@ ImmGetRegisterWordStyleW(
 typedef UINT (WINAPI *fpImmEnumRegisterWordA)(IN HKL, IN REGISTERWORDENUMPROCA, IN LPCSTR lpszReading, IN DWORD, IN LPCSTR lpszRegister, IN LPVOID);
 typedef UINT (WINAPI *fpImmEnumRegisterWordW)(IN HKL, IN REGISTERWORDENUMPROCW, IN LPCWSTR lpszReading, IN DWORD, IN LPCWSTR lpszRegister, IN LPVOID);
 
-UINT WINAPI 
+UINT WINAPI
 ImmEnumRegisterWordW(
-    IN HKL hKL,                             
-    IN REGISTERWORDENUMPROCW lpfnEnumProc,   
-    IN LPCWSTR lpszReading,                 
-    IN DWORD dwStyle,                       
-    IN LPCWSTR lpszRegister,                
-    IN LPVOID lpData                        
+    IN HKL hKL,
+    IN REGISTERWORDENUMPROCW lpfnEnumProc,
+    IN LPCWSTR lpszReading,
+    IN DWORD dwStyle,
+    IN LPCWSTR lpszRegister,
+    IN LPVOID lpData
     )
 {
-    IMPLEMENT_IMM_FUNCTION(EnumRegisterWord, 
+    IMPLEMENT_IMM_FUNCTION(EnumRegisterWord,
         (hKL, lpfnEnumProc, lpszReading, dwStyle, lpszRegister, lpData), 0)
 
     // --- Windows 95 only ---
@@ -494,7 +494,7 @@ ImmEnumRegisterWordW(
 typedef DWORD (WINAPI *fpImmGetImeMenuItemsA)(IN HIMC, IN DWORD, IN DWORD, OUT LPIMEMENUITEMINFOA, OUT LPIMEMENUITEMINFOA, IN DWORD);
 typedef DWORD (WINAPI *fpImmGetImeMenuItemsW)(IN HIMC, IN DWORD, IN DWORD, OUT LPIMEMENUITEMINFOW, OUT LPIMEMENUITEMINFOW, IN DWORD);
 
-DWORD WINAPI 
+DWORD WINAPI
 ImmGetImeMenuItemsW(
     IN HIMC hIMC,
     IN DWORD dwFlags,
@@ -504,7 +504,7 @@ ImmGetImeMenuItemsW(
     IN DWORD dwSize
     )
 {
-    IMPLEMENT_IMM_FUNCTION(GetImeMenuItems, 
+    IMPLEMENT_IMM_FUNCTION(GetImeMenuItems,
         (hIMC, dwFlags, dwType, lpImeParentMenu, lpImeMenu, dwSize), 0)
 
     // --- Windows 95 only ---

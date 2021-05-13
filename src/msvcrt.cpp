@@ -33,7 +33,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// define these symbols so that we don't get dllimport linkage 
+// define these symbols so that we don't get dllimport linkage
 // from the system headers
 #define _CRTIMP
 
@@ -52,9 +52,9 @@
 // ----------------------------------------------------------------------------
 // API
 
-int __cdecl 
+int __cdecl
 _wrename(
-    const wchar_t * oldname, 
+    const wchar_t * oldname,
     const wchar_t * newname
     )
 {
@@ -73,7 +73,7 @@ _wrename(
     return ::rename(mbcsOldname, mbcsNewname);
 }
 
-int __cdecl 
+int __cdecl
 _wremove(
     const wchar_t * path
     )
@@ -87,10 +87,10 @@ _wremove(
     return ::remove(mbcsPath);
 }
 
-int __cdecl 
+int __cdecl
 _wopen(
-    const wchar_t * filename, 
-    int oflag, 
+    const wchar_t * filename,
+    int oflag,
     ... /* [int pmode] */
     )
 {
@@ -110,9 +110,9 @@ _wopen(
     return ::_open(mbcsFilename, oflag, pmode);
 }
 
-int __cdecl 
+int __cdecl
 _waccess(
-    const wchar_t * path, 
+    const wchar_t * path,
     int mode
     )
 {
@@ -125,7 +125,7 @@ _waccess(
     return ::_access(mbcsPath, mode);
 }
 
-int __cdecl 
+int __cdecl
 _wchdir(
     const wchar_t * dirname
     )
@@ -139,9 +139,9 @@ _wchdir(
     return ::_chdir(mbcsDirname);
 }
 
-wchar_t * __cdecl 
+wchar_t * __cdecl
 _wgetcwd(
-    wchar_t * buffer, 
+    wchar_t * buffer,
     int maxlen
     )
 {
@@ -170,8 +170,8 @@ _wgetcwd(
     return buffer;
 }
 
-wchar_t * __cdecl 
-_wgetdcwd( 
+wchar_t * __cdecl
+_wgetdcwd(
    int drive,
    wchar_t *buffer,
    int maxlen
@@ -189,7 +189,7 @@ _wgetdcwd(
         localBuffer = stackBuffer;
 
     // get the current drive path, this will allocate the buffer if
-    // localBuffer is still set to NULL. If there is an error we can 
+    // localBuffer is still set to NULL. If there is an error we can
     // just return because we haven't allocated anything and the errno
     // will be set appropriately.
     cwd = ::_getdcwd(drive, localBuffer, localBuffer ? MAX_PATH : 0);
@@ -231,7 +231,7 @@ _wgetdcwd(
     return outputBuffer;
 }
 
-int __cdecl 
+int __cdecl
 _wmkdir(
     const wchar_t * dirname
     )
@@ -245,7 +245,7 @@ _wmkdir(
     return ::_mkdir(mbcsDirname);
 }
 
-int __cdecl 
+int __cdecl
 _wrmdir(
     const wchar_t * dirname
     )
@@ -259,9 +259,9 @@ _wrmdir(
     return ::_rmdir(mbcsDirname);
 }
 
-int __cdecl 
+int __cdecl
 _wstat(
-    const wchar_t * path, 
+    const wchar_t * path,
     struct _stat * buffer
     )
 {
@@ -274,9 +274,9 @@ _wstat(
     return ::_stat(mbcsPath, buffer);
 }
 
-int __cdecl 
+int __cdecl
 _wstati64(
-    const wchar_t * path, 
+    const wchar_t * path,
     struct _stati64 * buffer
     )
 {
