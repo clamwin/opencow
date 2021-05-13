@@ -15,21 +15,22 @@ VS_VERSION_INFO VERSIONINFO
 	FILETYPE 0x2L
 	FILESUBTYPE 0x0L
 BEGIN
-    BLOCK "StringFileInfo"
-    BEGIN
-        BLOCK "040904b0"
-        BEGIN
-            VALUE "FileDescription", "Open Layer for Unicode"
-            VALUE "FileVersion", "0, 7, 0, 0"
-            VALUE "InternalName", "opencow"
-            VALUE "LegalCopyright", "License: MPL 1.1/GPL 2.0/LGPL 2.1"
-            VALUE "OriginalFilename", "opencow.dll"
-            VALUE "ProductName", "Open Layer for Unicode"
-            VALUE "ProductVersion", "0, 7, 0, 0"
-        END
-    END
-    BLOCK "VarFileInfo"
-    BEGIN
-        VALUE "Translation", 0x0, 1033
-    END
+	BLOCK "StringFileInfo"
+	BEGIN
+		BLOCK "00000409"
+		BEGIN
+			VALUE "FileDescription", "Open Layer for Unicode"
+			VALUE "FileVersion", "0, 7, 0, 0"
+			VALUE "InternalName", "opencow"
+			VALUE "LegalCopyright", "License: MPL 1.1/GPL 2.0/LGPL 2.1"
+			VALUE "OriginalFilename", "opencow.dll"
+			VALUE "ProductName", "Open Layer for Unicode"
+			VALUE "ProductVersion", "0, 7, 0, 0"
+		END
+	END
+	BLOCK "VarFileInfo"
+	BEGIN
+		VALUE "Translation", 0x0, 1033
+	END
 END
+
