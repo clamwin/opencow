@@ -41,6 +41,7 @@
 #include <crtdbg.h>
 
 #include "MbcsBuffer.h"
+#include "unicode.h"
 
 // ----------------------------------------------------------------------------
 // API
@@ -74,13 +75,12 @@ CharLowerBuffW(
     IN DWORD cchLength
     )
 {
-    wchar_t c;
-    for (DWORD dwCount = 0; dwCount < cchLength; ++dwCount) {
-        c = lpsz[dwCount];
-        if (c >= 'A' && c <= 'Z')
-            lpsz[dwCount] = (unsigned short) ((c - 'A') + 'a');
-    }
-    return cchLength;
+    DWORD ret = cchLength;
+    if (!lpsz)
+        return 0; /* YES */
+    for (; cchLength; cchLength--, lpsz++)
+        *lpsz = tolowerW(*lpsz);
+    return ret;
 }
 
 LPWSTR
@@ -89,21 +89,10 @@ CharLowerW(
     IN OUT LPWSTR lpsz
     )
 {
-    if (HIWORD(lpsz) == 0) {
-        wchar_t c = LOWORD(lpsz);
-        if (c >= 'A' && c <= 'Z')
-            c = (unsigned short) ((c - 'A') + 'a');
-        return (LPWSTR) c;
-    }
-    else {
-        wchar_t c;
-        for (wchar_t *pTemp = lpsz; *pTemp; ++pTemp) {
-            c = *pTemp;
-            if (c >= 'A' && c <= 'Z')
-                *pTemp = (unsigned short) ((c - 'A') + 'a');
-        }
-        return lpsz;
-    }
+    if (HIWORD(lpsz))
+        return strlwrW(lpsz);
+    else
+        return (LPWSTR)((UINT_PTR) tolowerW(LOWORD(lpsz)));
 }
 
 LPWSTR WINAPI
@@ -136,35 +125,24 @@ CharUpperBuffW(
     IN DWORD cchLength
     )
 {
-    wchar_t c;
-    for (DWORD dwCount = 0; dwCount < cchLength; ++dwCount) {
-        c = lpsz[dwCount];
-        if (c >= 'a' && c <= 'z')
-            lpsz[dwCount] = (unsigned short) ((c - 'a') + 'Z');
-    }
-    return cchLength;
+    DWORD ret = cchLength;
+    if (!lpsz)
+        return 0; /* YES */
+    for (; cchLength; cchLength--, lpsz++)
+        *lpsz = toupperW(*lpsz);
+    return ret;
 }
 
-LPWSTR WINAPI
+LPWSTR
+WINAPI
 CharUpperW(
     IN OUT LPWSTR lpsz
     )
 {
-    if (HIWORD(lpsz) == 0) {
-        wchar_t c = LOWORD(lpsz);
-        if (c >= 'a' && c <= 'z')
-            c = (unsigned short) ((c - 'a') + 'A');
-        return (LPWSTR) c;
-    }
-    else {
-        wchar_t c;
-        for (wchar_t *pTemp = lpsz; *pTemp; ++pTemp) {
-            c = *pTemp;
-            if (c >= 'a' && c <= 'z')
-                *pTemp = (unsigned short) ((c - 'a') + 'A');
-        }
-        return lpsz;
-    }
+    if (HIWORD(lpsz))
+        return struprW(lpsz);
+    else
+        return (LPWSTR)((UINT_PTR) toupperW(LOWORD(lpsz)));
 }
 
 // CopyAcceleratorTableW
