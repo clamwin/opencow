@@ -273,8 +273,8 @@ CreateProcessW(
         &startupInfoA, lpProcessInformation);
 }
 
-HANDLE WINAPI
-CreateSemaphoreW(
+extern "C" HANDLE WINAPI
+OCOW_CreateSemaphoreW(
     IN LPSECURITY_ATTRIBUTES lpSemaphoreAttributes,
     IN LONG lInitialCount,
     IN LONG lMaximumCount,
@@ -554,7 +554,7 @@ GetAtomNameW(
 }
 
 //TODO: MSLU adds support for CP_UTF7 and CP_UTF8
-BOOL WINAPI
+extern "C" BOOL WINAPI
 OCOW_GetCPInfo(
     IN UINT       CodePage,
     OUT LPCPINFO  lpCPInfo
@@ -926,8 +926,8 @@ GetModuleFileNameW(
     return (DWORD) ::MultiByteToWideChar(CP_ACP, 0, mbcsFilename, -1, lpFilename, nSize);
 }
 
-HMODULE WINAPI
-GetModuleHandleW(
+extern "C" HMODULE WINAPI
+OCOW_GetModuleHandleW(
     IN LPCWSTR lpModuleName
     )
 {
@@ -965,7 +965,7 @@ OCOW_Compare(
     return nResult;
 }
 
-FARPROC WINAPI
+extern "C" FARPROC WINAPI
 OCOW_GetProcAddress(
     IN HMODULE hModule,
     IN LPCSTR lpProcName
@@ -1875,7 +1875,7 @@ IsBadStringPtrW(
 }
 
 //TODO: MSLU adds support for CP_UTF7 and CP_UTF8
-BOOL WINAPI
+extern "C" BOOL WINAPI
 OCOW_IsValidCodePage(
     IN UINT  CodePage
     )
@@ -1971,7 +1971,7 @@ MoveFileW(
 }
 
 //TODO: MSLU adds support for CP_UTF7 and CP_UTF8 to Windows 95
-int WINAPI
+extern "C" int WINAPI
 OCOW_MultiByteToWideChar(
     IN UINT     CodePage,
     IN DWORD    dwFlags,
@@ -2216,7 +2216,7 @@ SetVolumeLabelW(
 // WaitNamedPipeW
 
 //TODO: MSLU adds support for CP_UTF7 and CP_UTF8 to Windows 95
-int WINAPI
+extern "C" int WINAPI
 OCOW_WideCharToMultiByte(
     IN UINT     CodePage,
     IN DWORD    dwFlags,
@@ -2303,7 +2303,7 @@ lstrcpynW(
     return lpString1;
 }
 
-int WINAPI
+extern "C" int WINAPI
 OCOW_lstrlenW(
     IN LPCWSTR lpString
     )

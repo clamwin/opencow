@@ -127,7 +127,7 @@ EXPORTS
     CreateMutexW
 ;    CreateNamedPipeW
     CreateProcessW
-    CreateSemaphoreW
+    CreateSemaphoreW = OCOW_CreateSemaphoreW
     CreateWaitableTimerW
     DeleteFileW
 ;    EndUpdateResourceA
@@ -172,7 +172,7 @@ EXPORTS
     GetLogicalDriveStringsW
     GetLongPathNameW
     GetModuleFileNameW
-    GetModuleHandleW
+    GetModuleHandleW = OCOW_GetModuleHandleW
 ;    GetNamedPipeHandleStateW
 ;    GetNumberFormatW
 ;    GetPrivateProfileIntW
