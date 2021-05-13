@@ -2313,3 +2313,26 @@ OCOW_lstrlenW(
         ++len;
     return len;
 }
+
+extern "C" BOOL WINAPI OCOW_GetVersionExW(LPOSVERSIONINFOW lpVersionInformation)
+{
+    OSVERSIONINFOA osvi;
+
+    if (lpVersionInformation->dwOSVersionInfoSize >= sizeof(OSVERSIONINFOW))
+    {
+        memset(&osvi, 0, sizeof(osvi));
+        osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOA);
+        if (!GetVersionExA(&osvi))
+            return FALSE;
+
+        memcpy(lpVersionInformation, &osvi, sizeof(osvi));
+        ::MultiByteToWideChar(CP_ACP, 0, osvi.szCSDVersion, -1, lpVersionInformation->szCSDVersion,
+                              sizeof(lpVersionInformation->szCSDVersion));
+        return TRUE;
+    }
+    else
+    {
+        SetLastError(ERROR_INSUFFICIENT_BUFFER);
+        return FALSE;
+    }
+}
