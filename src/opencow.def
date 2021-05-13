@@ -115,7 +115,7 @@ EXPORTS
 ;    BuildCommDCBW
 ;    CallNamedPipeW
 ;    CommConfigDialogW
-;    CompareStringW
+    CompareStringW
 ;    CopyFileExW
     CopyFileW
     CreateDirectoryExW
@@ -193,7 +193,7 @@ EXPORTS
     GetTempFileNameW
     GetTempPathW
 ;    GetTimeFormatW
-;    GetVersionExW
+    GetVersionExW = OCOW_GetVersionExW
 ;    GetVolumeInformationW
     GetWindowsDirectoryW
     GlobalAddAtomW

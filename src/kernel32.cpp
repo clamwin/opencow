@@ -82,6 +82,28 @@ AddAtomW(
 // CompareStringW
 // CopyFileExW
 
+
+int WINAPI
+CompareStringW(
+    LCID Locale,
+    DWORD dwCmpFlags,
+    PCNZWCH lpString1,
+    int cchCount1,
+    PCNZWCH lpString2,
+    int cchCount2)
+{
+    CMbcsBuffer mbcsString1, mbcsString2;
+
+    if (!mbcsString1.FromUnicode(lpString1))
+        return 0;
+
+    if (!mbcsString2.FromUnicode(lpString2))
+        return 0;
+
+    return ::CompareStringA(Locale, dwCmpFlags, mbcsString1, cchCount1, mbcsString2, cchCount2);
+}
+
+
 BOOL WINAPI
 CopyFileW(
     IN LPCWSTR lpExistingFileName,
