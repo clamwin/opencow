@@ -148,7 +148,7 @@ EXPORTS
     FindNextFileW
     FindResourceExW
     FindResourceW
-;    FormatMessageW
+    FormatMessageW
     FreeEnvironmentStringsW
     GetAtomNameW
     GetCPInfo = OCOW_GetCPInfo
@@ -237,7 +237,7 @@ EXPORTS
 ;    WriteConsoleInputW
 ;    WriteConsoleOutputCharacterW
 ;    WriteConsoleOutputW
-;    WriteConsoleW
+    WriteConsoleW
 ;    WritePrivateProfileSectionW
 ;    WritePrivateProfileStringW
 ;    WritePrivateProfileStructW

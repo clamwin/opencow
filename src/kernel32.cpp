@@ -542,7 +542,32 @@ FindResourceW(
     return ::FindResourceA(hModule, lpTypeA, lpNameA);
 }
 
-// FormatMessageW
+DWORD FormatMessageW(
+    IN DWORD   dwFlags,
+    IN LPCVOID lpSource,
+    IN DWORD   dwMessageId,
+    IN DWORD   dwLanguageId,
+    IN LPWSTR  lpBuffer,
+    IN DWORD   nSize,
+    IN va_list *Arguments
+    )
+{
+    if (!lpBuffer || nSize == 0)
+        return 0;
+
+    CMbcsBuffer mbcsBuffer;
+    DWORD dwSize = ::FormatMessageA(dwFlags, lpSource, dwMessageId, dwLanguageId, mbcsBuffer, mbcsBuffer.BufferSize(), Arguments);
+
+    if (dwSize == 0)
+        return 0;
+
+    int uSize = MultiByteToWideChar(CP_ACP, 0, mbcsBuffer, -1, lpBuffer, nSize);
+
+    if (uSize == 0)
+        return 0;
+
+    return uSize - 1;
+}
 
 BOOL WINAPI
 FreeEnvironmentStringsW(
@@ -2249,6 +2274,7 @@ OCOW_WideCharToMultiByte(
     IN LPCSTR   lpDefaultChar,
     OUT LPBOOL  lpUsedDefaultChar)
 {
+    dwFlags &= ~MB_ERR_INVALID_CHARS;
     return ::WideCharToMultiByte(CodePage, dwFlags, lpWideCharStr, cchWideChar,
         lpMultiByteStr, cbMultiByte, lpDefaultChar, lpUsedDefaultChar);
 }
@@ -2256,7 +2282,24 @@ OCOW_WideCharToMultiByte(
 // WriteConsoleInputW
 // WriteConsoleOutputCharacterW
 // WriteConsoleOutputW
-// WriteConsoleW
+
+BOOL WINAPI WriteConsoleW(
+    IN HANDLE   hConsoleOutput,
+    const VOID  *lpBuffer,
+    IN DWORD    nNumberOfCharsToWrite,
+    OUT         LPDWORD lpNumberOfCharsWritten,
+    IN          LPVOID  lpReserved
+  )
+{
+    CMbcsBuffer mbcsBuffer;
+    if (!mbcsBuffer.FromUnicode((LPCWSTR)lpBuffer))
+        return FALSE;
+
+    return ::WriteConsoleA(hConsoleOutput,mbcsBuffer, nNumberOfCharsToWrite,
+        lpNumberOfCharsWritten, lpReserved);
+}
+
+
 // WritePrivateProfileSectionW
 // WritePrivateProfileStringW
 // WritePrivateProfileStructW
