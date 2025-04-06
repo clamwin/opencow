@@ -201,6 +201,9 @@ CreateFileW(
     if (!mbcsFileName.FromUnicode(lpFileName))
         return INVALID_HANDLE_VALUE;
 
+    dwShareMode &= ~FILE_SHARE_DELETE;
+    dwFlagsAndAttributes &= ~FILE_FLAG_BACKUP_SEMANTICS;
+
     return ::CreateFileA(mbcsFileName, dwDesiredAccess, dwShareMode,
         lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes,
         hTemplateFile);
